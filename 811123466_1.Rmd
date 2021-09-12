@@ -1,0 +1,72 @@
+---
+title: "Quatatative Management 1"
+author: "Sumit Dutt Mishra"
+date: "9/11/2021"
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+###Q1: Data Source
+Our dataset **Medals** has been extracted from **KAGGLE** , is a collection of database and datasets used by Machine Learning community for the analysis of Machine Learning algorithms
+
+###Q2: Importing Medal Dataset to R Studio
+
+```{r }
+setwd("C:/Users/User/Downloads/archive (2)")
+Medals<- read.csv("C:/Users/User/Downloads/archive (2)/Tokyo Medals 2021.csv")
+head(Medals)
+```
+
+###Q3: Descriptive Analysis of Medals Dataset
+Inspecting Dataset
+
+```{r message=FALSE}
+summary(Medals)
+
+####Arithmetic Mean :AM of a set of observation is defined as a sum divided by number of observations
+```{r }
+####Mean of overall Medals
+mean(Medals$Total)
+
+```
+**Median :** is the the middle value of the observation
+####Rank of team with bronze
+```{r }
+#### Median of Bronze
+median(sort(Medals$Bronze))
+```
+
+**Mode:** refers to the value which occurs to the maximum frequency
+####Which team got maximum Gold
+
+```{r }
+sort(table(Medals$Gold),decreasing = TRUE)
+```
+###Q4: Transformation
+####Applying log transformation on Silver Column
+```{r }
+Silver_Medals<- log10(Medals$Silver)
+## Displaying first 10 values
+Silver_Medals[1:10]
+
+```
+###Q5: Visualisation
+**Histogram Plot**
+
+```{r message=FALSE, warning=FALSE}
+library(ggplot2)
+ggplot(Medals,aes(x=Gold.Medal))+ geom_histogram()+ggtitle('Histogram Graph')
+
+```
+**Scatter Plot
+
+```{r }
+ggplot(Medals,aes(x=Total, y= Rank.By.Total))+geom_point()+ggtitle('Scatter Plot')
+```
+
